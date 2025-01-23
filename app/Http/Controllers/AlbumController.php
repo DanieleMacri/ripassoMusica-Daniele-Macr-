@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Album;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use App\Http\Requests\AlbumRequest;
 use Illuminate\Routing\Controllers\Middleware;
 
 class AlbumController extends Controller
@@ -30,7 +31,7 @@ class AlbumController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
         $album =Album::create([
             'name' => $request->input('name'),
@@ -77,6 +78,10 @@ class AlbumController extends Controller
      */
     public function destroy(Album $album)
     {
+        // per togliere le relazioni
+        $album->genres()->detach();
+        
+
         $album->delete();
         return redirect(route('home'))->with('message', 'Album eliminato con successo');
     }
