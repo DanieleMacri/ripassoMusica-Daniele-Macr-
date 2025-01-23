@@ -27,6 +27,14 @@
                         <label class="form-label">Cover</label>
                         <input type="file" class="form-control" name="img">
                     </div>
+                    <div class="mb-3">
+                        <select class="form-control" aria-label="Default select example" name="genres[]" multiple>
+                            @foreach ($genres as $genre)
+                                <option value="{{$genre->id}}">{{$genre->name}}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
 
 
                     <button type="submit" class="btn btn-primary">Crea</button>

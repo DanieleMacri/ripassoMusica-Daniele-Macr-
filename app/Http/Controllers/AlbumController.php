@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Album;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -22,7 +23,8 @@ class AlbumController extends Controller
      */
     public function create()
     {
-        return view('album.create');
+        $genres=Genre::all();   
+        return view('album.create', compact('genres'));
     }
 
     /**
@@ -30,11 +32,14 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        Album::create([
+        $album =Album::create([
             'name' => $request->input('name'),
             'description' => $request->input('description'),
             'img' => $request->file('img')->store('albums', 'public'),
+            'user_id' => auth()->user()->id
         ]);
+
+        $album->genres()->attach($request->input('genres'));
 
         return redirect(route('home'))->with('message', 'Album creato con successo');
     }

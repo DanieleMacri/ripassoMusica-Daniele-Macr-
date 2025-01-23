@@ -32,6 +32,7 @@
                         <label class="form-label">Cover</label>
                         <input type="file" class="form-control" name="img">
                     </div>
+                    
 
 
                     <button type="submit" class="btn btn-primary">Crea</button>

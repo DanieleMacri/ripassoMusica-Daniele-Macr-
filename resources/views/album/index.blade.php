@@ -17,6 +17,11 @@
                     <div class="card-body text-center">
                       <h5 class="card-title">{{$album->name}}</h5>
                       <p class="card-text">{{$album->description}}</p>
+                      <h5 class="card-text">Elenco dei generi:</h5>
+                      @foreach ($album->genres as $genre)
+                          <p class="card-text">{{$genre->name}}</p>
+                          
+                      @endforeach
                       <a href="{{route('album.show', compact('album'))}}" class="btn btn-primary">Dettaglio</a>
                     </div>
                 </div>
